@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ExpandableListView</string>
+    <string name="enter_your_fullname">Enter Your FullName</string>
+    <string name="enter_your_email">Enter Your Email</string>
+    <string name="enter_request_data_here">Enter Request Data Here</string>
+    <string name="submit">SUBMIT</string>
+    <string name="request_form">REQUEST FORM</string>
 </resources>
