@@ -13,14 +13,15 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import com.team295.expandablelistview.R;
+import com.team295.expandablelistview.model.StringModel;
 
 public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<String> expandableListTitle;
-    private HashMap<String, List<String>> expandableListDetail;
+    private HashMap<String, List<StringModel>> expandableListDetail;
 
     public CustomExpandableListAdapter(Context mContext, List<String> mExpandableListTitle,
-                                       HashMap<String, List<String>> mExpandableListDetail) {
+                                       HashMap<String, List<StringModel>> mExpandableListDetail) {
         this.context = mContext;
         this.expandableListTitle = mExpandableListTitle;
         this.expandableListDetail = mExpandableListDetail;
@@ -40,14 +41,14 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int listPosition, final int expandedListPosition, boolean isLastChild,
                              View convertView, ViewGroup parent) {
-        final String expandedListText = (String) getChild(listPosition, expandedListPosition);
+        final StringModel expandedListModel = (StringModel) getChild(listPosition, expandedListPosition);
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);convertView = layoutInflater
                     .inflate(R.layout.list_item, null);
         }
         TextView expandedListTextView = convertView.findViewById(R.id.expandedListItem);
-        expandedListTextView.setText(expandedListText);
+        expandedListTextView.setText(expandedListModel.getStringName());
         return convertView;
     }
 
@@ -77,8 +78,8 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         String listTitle = (String) getGroup(listPosition);
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.context.
-                    getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.list_group, null);
+                    getSystemService(Context.LAYOUT_INFLATER_SERVICE);convertView = layoutInflater
+                    .inflate(R.layout.list_group, null);
         }
         TextView listTitleTextView = convertView.findViewById(R.id.listTitle);
         listTitleTextView.setTypeface(null, Typeface.BOLD);

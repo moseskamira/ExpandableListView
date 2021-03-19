@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.team295.expandablelistview.R;
 import com.team295.expandablelistview.adapter.CustomExpandableListAdapter;
+import com.team295.expandablelistview.model.StringModel;
 import com.team295.expandablelistview.viewModel.StringArrayDataViewModel;
 
 import java.util.ArrayList;
@@ -24,11 +25,11 @@ public class MainActivity extends AppCompatActivity {
     ExpandableListView expandableListView;
     ExpandableListAdapter expandableListAdapter;
     List<String> expandableListTitle;
-    HashMap<String, List<String>> expandableListDetail;
+    HashMap<String, List<StringModel>> expandableListDetail;
     StringArrayDataViewModel stringArrayDataViewModel;
-    List<String> footballData;
-    List<String> cricketData;
-    List<String> requestForm;
+    List<StringModel> footballData;
+    List<StringModel> cricketData;
+    List<StringModel> requestForm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +59,10 @@ public class MainActivity extends AppCompatActivity {
 
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
+                                        int childPosition, long id) {
                 if (Objects.requireNonNull(expandableListDetail.get(expandableListTitle
-                        .get(groupPosition))).get(childPosition)
+                        .get(groupPosition))).get(childPosition).getStringName()
                         .equalsIgnoreCase("Open RequestForm")) {
                     startActivity(new Intent(MainActivity.this, RequestFormActivity
                             .class));
@@ -75,38 +77,38 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public HashMap<String, List<String>> getData() {
-        HashMap<String, List<String>> expandableListDetail = new HashMap<>();
+    public HashMap<String, List<StringModel>> getData() {
+        HashMap<String, List<StringModel>> expandableListDetail = new HashMap<>();
         expandableListDetail.put("FOOTBALL TEAMS", retrieveFootballData());
         expandableListDetail.put("CRICKET TEAMS",retrieveCricketData() );
         expandableListDetail.put("REQUEST FORM", retrieveRequestForm());
         return expandableListDetail;
     }
 
-    private List<String> retrieveFootballData() {
-        stringArrayDataViewModel.fetchFootBallLiveData().observe(this, new Observer<List<String>>() {
+    private List<StringModel> retrieveFootballData() {
+        stringArrayDataViewModel.fetchFootBallLiveData().observe(this, new Observer<List<StringModel>>() {
             @Override
-            public void onChanged(List<String> strings) {
+            public void onChanged(List<StringModel> strings) {
                 footballData.addAll(strings);
             }
         });
         return footballData;
     }
 
-    private List<String> retrieveCricketData() {
-        stringArrayDataViewModel.fetchCricketLiveData().observe(this, new Observer<List<String>>() {
+    private List<StringModel> retrieveCricketData() {
+        stringArrayDataViewModel.fetchCricketLiveData().observe(this, new Observer<List<StringModel>>() {
             @Override
-            public void onChanged(List<String> strings) {
+            public void onChanged(List<StringModel> strings) {
                cricketData.addAll(strings);
             }
         });
         return cricketData;
     }
 
-    private List<String> retrieveRequestForm() {
-        stringArrayDataViewModel.fetchRequestForm().observe(this, new Observer<List<String>>() {
+    private List<StringModel> retrieveRequestForm() {
+        stringArrayDataViewModel.fetchRequestForm().observe(this, new Observer<List<StringModel>>() {
             @Override
-            public void onChanged(List<String> strings) {
+            public void onChanged(List<StringModel> strings) {
                 requestForm.addAll(strings);
             }
         });

@@ -1,32 +1,34 @@
 package com.team295.expandablelistview.repository;
 
+import com.team295.expandablelistview.model.StringModel;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class StringArrayData {
-    public static List<String> returnFootballArrayList() {
-        List<String> football = new ArrayList<>();
-        football.add("Brazil");
-        football.add("Spain");
-        football.add("Germany");
-        football.add("Netherlands");
-        football.add("Italy");
+    public static List<StringModel> returnFootballArrayList() {
+        List<StringModel> football = new ArrayList<>();
+        football.add(new StringModel("Brazil"));
+        football.add(new StringModel("Spain"));
+        football.add(new StringModel("Germany"));
+        football.add(new StringModel("Netherlands"));
+        football.add(new StringModel("Italy"));
         return football;
     }
 
-    public static List<String> returnCricketArrayList() {
-        List<String> cricket = new ArrayList<>();
-        cricket.add("India");
-        cricket.add("Pakistan");
-        cricket.add("Australia");
-        cricket.add("England");
-        cricket.add("South Africa");
+    public static List<StringModel> returnCricketArrayList() {
+        List<StringModel> cricket = new ArrayList<>();
+        cricket.add(new StringModel("India"));
+        cricket.add(new StringModel("Pakistan"));
+        cricket.add(new StringModel("Australia"));
+        cricket.add(new StringModel("England"));
+        cricket.add(new StringModel("South Africa"));
         return cricket;
     }
 
-    public static List<String> returnRequestForm() {
-        List<String> requestForm = new ArrayList<>();
-        requestForm.add("Open RequestForm");
+    public static List<StringModel> returnRequestForm() {
+        List<StringModel> requestForm = new ArrayList<>();
+        requestForm.add(new StringModel("Open RequestForm"));
         return requestForm;
     }
 
